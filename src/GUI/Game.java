@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Audio.Sounds;
+import Audio.WinSounds;
 import Code.Currency;
 import Code.User;
 import Code.Update;
@@ -28,10 +30,12 @@ public class Game extends javax.swing.JFrame {
     String ID = null;
     double Balance = 0.0;
     double CurrentBet = 1.00;
-    double IncramentNumber = 0.10;
+    double IncramentNumber = 0.20;
     public int[] reels = new int[5];
     private final Random rand = new Random();
     Winning win = new Winning();
+    Sounds sound = new Sounds();
+    WinSounds WinS = new WinSounds();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,15 +77,15 @@ public class Game extends javax.swing.JFrame {
 
         LBLBet.setText("Current Bet: " + currency.returnCurrency(CurrentBet));
 
-        reel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/6.jpg"))); // NOI18N
+        reel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1.jpg"))); // NOI18N
 
-        reel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/4.jpg"))); // NOI18N
+        reel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1.jpg"))); // NOI18N
 
         reel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1.jpg"))); // NOI18N
 
-        reel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/3.jpg"))); // NOI18N
+        reel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1.jpg"))); // NOI18N
 
-        reel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/6.jpg"))); // NOI18N
+        reel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -265,8 +269,12 @@ public class Game extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (!currency.returnCurrency(CurrentBet).equals("£10.00")) {
+            BTNDecBet.setVisible(true);
             CurrentBet += IncramentNumber;
             updateBet();
+            if (currency.returnCurrency(CurrentBet).equals("£10.00")) {
+                BTNIncBet.setVisible(false);
+            }
         }
 
     }//GEN-LAST:event_BTNIncBetActionPerformed
@@ -274,9 +282,12 @@ public class Game extends javax.swing.JFrame {
     private void BTNDecBetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNDecBetActionPerformed
         // TODO add your handling code here:
         if (!currency.returnCurrency(CurrentBet).equals("£1.00")) {
+            BTNIncBet.setVisible(true);
             CurrentBet -= IncramentNumber;
             updateBet();
-
+            if (currency.returnCurrency(CurrentBet).equals("£1.00")) {
+                BTNDecBet.setVisible(false);
+            }
         }
     }//GEN-LAST:event_BTNDecBetActionPerformed
 
@@ -287,18 +298,18 @@ public class Game extends javax.swing.JFrame {
     private void mnuInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuInfoActionPerformed
         new Info().setVisible(true);
     }//GEN-LAST:event_mnuInfoActionPerformed
-
+    
     private void updateBet() {
         LBLBet.setText("Current Bet: " + currency.returnCurrency(CurrentBet));
-
+        
     }
-
+    
     private void updateBalance() {
         LBLBalance.setText("Balance: " + currency.returnCurrency(Balance));
-
+        
     }
     User player = new User();
-
+    
     public Game(String args[]) {
         player.setID(args[0]);
         player.setName(args[1]);
@@ -314,41 +325,96 @@ public class Game extends javax.swing.JFrame {
                 update.available();
             } else {
                 initComponents();
+                reels[0] = 6;
+                reels[1] = 3;
+                reels[2] = 1;
+                reels[3] = 4;
+                reels[4] = 6;
+                updateReels();
+                BTNDecBet.setVisible(false);
             }
         } catch (Exception ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     private void spin() {
         System.out.println("Spinning reels...");
         Thread t = new Thread() {
             @Override
             public void run() {
-                int spinFor = rand.nextInt(15);
+                Thread stop = new Thread() {
+                    @Override
+                    public void run() {
+                        sound.play(true);
+                        try {
+                            Thread.sleep(30);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        sound.play(false);
+                    }
+                };
+                Thread winSound = new Thread() {
+                    @Override
+                    public void run() {
+                        WinS.play(true);
+                        try {
+                            Thread.sleep(30);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        sound.play(false);
+                    }
+                };
+                int spinFor = rand.nextInt(21);
                 while (spinFor <= 5) {
-                    spinFor = rand.nextInt(15);
+                    spinFor = rand.nextInt(21);
                 }
-                for (int i = 0; i < spinFor * 5; i++) {
-                    if (i < spinFor) {
+                int r1 = spinFor;
+                int r2 = r1 + rand.nextInt(15);
+                int r3 = r2 + rand.nextInt(13);
+                int r4 = r3 + rand.nextInt(10);
+                int r5 = r4 + rand.nextInt(9);
+                for (int i = 0; i < r5; i++) {
+                    if (i < r1) {
                         reels[0] += 1;
+                        if (i == r1 - 1) {
+                            stop.run();
+                        }
                     }
-                    if (i < spinFor * 2 - 2) {
+                    if (i < r2) {
                         reels[1] += 1;
+                        if (i == r2 - 1) {
+                            stop.run();
+                        }
                     }
-                    if (i < spinFor * 3 + 1) {
+                    if (i < r3) {
                         reels[2] += 1;
+                        if (i == r3 - 1) {
+                            stop.run();
+                        }
                     }
-                    if (i < spinFor * 4 - 4) {
+                    if (i < r4) {
                         reels[3] += 1;
+                        if (i == r4 - 1) {
+                            stop.run();
+                        }
                     }
-                    if (i < spinFor * 5 - 5) {
+                    if (i < r5) {
                         reels[4] += 1;
+                        if (i == r5 - 1) {
+                            stop.run();
+                        }
                     }
                     updateReels();
                     Sleep();
                 }
-                Balance += win.checkForWin(reels, CurrentBet);
+                double earned = win.checkForWin(reels, CurrentBet);
+                if (earned > 0) {
+                    winSound.run();
+                }
+                Balance += earned;
                 updateBalance();
                 BTNSpin.setEnabled(true);
                 BTNAuto.setEnabled(true);
@@ -358,7 +424,7 @@ public class Game extends javax.swing.JFrame {
         };
         t.start();
     }
-
+    
     private void updateReels() {
         for (int i = 0; i < 5; i++) {
             if (reels[i] > 7) {
@@ -371,7 +437,7 @@ public class Game extends javax.swing.JFrame {
         reel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[3] + ".jpg")));
         reel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[4] + ".jpg")));
     }
-
+    
     private void Sleep() {
         try {
             Thread.sleep(50);
@@ -411,7 +477,7 @@ public class Game extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
+                
                 new Game(args).setVisible(true);
             }
         });

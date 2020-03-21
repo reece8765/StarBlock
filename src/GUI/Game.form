@@ -160,14 +160,14 @@
         <Component class="javax.swing.JLabel" name="reel5">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Images/6.jpg"/>
+              <Image iconType="3" name="/Images/1.jpg"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="reel4">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Images/4.jpg"/>
+              <Image iconType="3" name="/Images/1.jpg"/>
             </Property>
           </Properties>
         </Component>
@@ -181,14 +181,14 @@
         <Component class="javax.swing.JLabel" name="reel2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Images/3.jpg"/>
+              <Image iconType="3" name="/Images/1.jpg"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="reel1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Images/6.jpg"/>
+              <Image iconType="3" name="/Images/1.jpg"/>
             </Property>
           </Properties>
         </Component>
