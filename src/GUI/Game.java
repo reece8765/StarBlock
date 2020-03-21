@@ -59,6 +59,10 @@ public class Game extends javax.swing.JFrame {
         BTNDecBet = new javax.swing.JButton();
         BTNSpin = new javax.swing.JButton();
         BTNAuto = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mnuInfo = new javax.swing.JMenuItem();
+        mnuExit = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -171,6 +175,28 @@ public class Game extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jMenu1.setText("Menu");
+
+        mnuInfo.setText("Info");
+        mnuInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuInfoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuInfo);
+
+        mnuExit.setText("Exit Game");
+        mnuExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuExitActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuExit);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -253,6 +279,14 @@ public class Game extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_BTNDecBetActionPerformed
+
+    private void mnuExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuExitActionPerformed
+        //Exit back to the Casino application. Ensure to pass the username, password and domain boolean back to the application.
+    }//GEN-LAST:event_mnuExitActionPerformed
+
+    private void mnuInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuInfoActionPerformed
+        new Info().setVisible(true);
+    }//GEN-LAST:event_mnuInfoActionPerformed
 
     private void updateBet() {
         LBLBet.setText("Current Bet: " + currency.returnCurrency(CurrentBet));
@@ -393,9 +427,13 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JLabel LBLName;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JMenuItem mnuExit;
+    private javax.swing.JMenuItem mnuInfo;
     private javax.swing.JLabel reel1;
     private javax.swing.JLabel reel2;
     private javax.swing.JLabel reel3;
