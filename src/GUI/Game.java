@@ -7,10 +7,12 @@ package GUI;
 
 import Audio.Sounds;
 import Audio.WinSounds;
+import Code.Background;
 import Code.Currency;
 import Code.User;
 import Code.Update;
 import Code.Winning;
+import Code.Global;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,11 +33,12 @@ public class Game extends javax.swing.JFrame {
     double Balance = 0.0;
     double CurrentBet = 1.00;
     double IncramentNumber = 0.20;
-    public int[] reels = new int[5];
+    public int[][] reels = new int[5][3];
     private final Random rand = new Random();
     Winning win = new Winning();
     Sounds sound = new Sounds();
     WinSounds WinS = new WinSounds();
+    Background back = new Background();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,16 +49,26 @@ public class Game extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel6 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         LBLName = new javax.swing.JLabel();
         LBLBet = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        reel5 = new javax.swing.JLabel();
-        reel4 = new javax.swing.JLabel();
-        reel3 = new javax.swing.JLabel();
-        reel2 = new javax.swing.JLabel();
-        reel1 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        pnlReels = new javax.swing.JPanel();
+        reel32 = new javax.swing.JLabel();
+        reel31 = new javax.swing.JLabel();
+        reel53 = new javax.swing.JLabel();
+        reel43 = new javax.swing.JLabel();
+        reel52 = new javax.swing.JLabel();
+        reel21 = new javax.swing.JLabel();
+        reel22 = new javax.swing.JLabel();
+        reel23 = new javax.swing.JLabel();
+        reel51 = new javax.swing.JLabel();
+        reel11 = new javax.swing.JLabel();
+        reel13 = new javax.swing.JLabel();
+        reel12 = new javax.swing.JLabel();
+        reel41 = new javax.swing.JLabel();
+        reel42 = new javax.swing.JLabel();
+        reel33 = new javax.swing.JLabel();
+        txtVersion = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         LBLBalance = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -71,49 +84,136 @@ public class Game extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jLabel6.setText("StarBlock");
+        lblTitle.setText("StarBlock");
 
         LBLName.setText("Player: " +player.returnName());
 
         LBLBet.setText("Current Bet: " + currency.returnCurrency(CurrentBet));
 
-        reel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1.jpg"))); // NOI18N
+        pnlReels.setBackground(new java.awt.Color(204, 204, 204));
 
-        reel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1.jpg"))); // NOI18N
+        reel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/2.png"))); // NOI18N
+        reel32.setFocusable(false);
 
-        reel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1.jpg"))); // NOI18N
+        reel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/6.png"))); // NOI18N
+        reel31.setFocusable(false);
 
-        reel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1.jpg"))); // NOI18N
+        reel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/2.png"))); // NOI18N
+        reel53.setFocusable(false);
 
-        reel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1.jpg"))); // NOI18N
+        reel43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/2.png"))); // NOI18N
+        reel43.setFocusable(false);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        reel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/7.png"))); // NOI18N
+        reel52.setFocusable(false);
+
+        reel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/5.png"))); // NOI18N
+        reel21.setFocusable(false);
+
+        reel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/3.png"))); // NOI18N
+        reel22.setFocusable(false);
+
+        reel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/3.png"))); // NOI18N
+        reel23.setFocusable(false);
+
+        reel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1.png"))); // NOI18N
+        reel51.setFocusable(false);
+
+        reel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/5.png"))); // NOI18N
+        reel11.setFocusable(false);
+
+        reel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/4.png"))); // NOI18N
+        reel13.setFocusable(false);
+
+        reel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/6.png"))); // NOI18N
+        reel12.setFocusable(false);
+
+        reel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/7.png"))); // NOI18N
+        reel41.setFocusable(false);
+
+        reel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/3.png"))); // NOI18N
+        reel42.setFocusable(false);
+
+        reel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1.png"))); // NOI18N
+        reel33.setFocusable(false);
+
+        javax.swing.GroupLayout pnlReelsLayout = new javax.swing.GroupLayout(pnlReels);
+        pnlReels.setLayout(pnlReelsLayout);
+        pnlReelsLayout.setHorizontalGroup(
+            pnlReelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReelsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(reel1)
-                .addGap(18, 18, 18)
-                .addComponent(reel2)
-                .addGap(18, 18, 18)
-                .addComponent(reel3)
-                .addGap(18, 18, 18)
-                .addComponent(reel4)
-                .addGap(18, 18, 18)
-                .addComponent(reel5)
+                .addGroup(pnlReelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(reel13)
+                    .addComponent(reel12)
+                    .addComponent(reel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlReelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(reel23, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(reel22)
+                    .addComponent(reel21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlReelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlReelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(reel31)
+                        .addComponent(reel32))
+                    .addComponent(reel33))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlReelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(reel41)
+                    .addGroup(pnlReelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(reel42)
+                        .addComponent(reel43)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlReelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(reel51, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(reel52, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(reel53, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(reel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(reel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(reel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(reel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(reel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        pnlReelsLayout.setVerticalGroup(
+            pnlReelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlReelsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlReelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlReelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(pnlReelsLayout.createSequentialGroup()
+                            .addComponent(reel21)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(reel22)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(reel23))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlReelsLayout.createSequentialGroup()
+                            .addGroup(pnlReelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(reel41)
+                                .addComponent(reel31))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(pnlReelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(pnlReelsLayout.createSequentialGroup()
+                                    .addComponent(reel32)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(reel33))
+                                .addGroup(pnlReelsLayout.createSequentialGroup()
+                                    .addComponent(reel42)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(reel43)))))
+                    .addGroup(pnlReelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(pnlReelsLayout.createSequentialGroup()
+                            .addComponent(reel11)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(reel12)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(reel13))
+                        .addGroup(pnlReelsLayout.createSequentialGroup()
+                            .addComponent(reel51)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(reel52)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(reel53))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel8.setText(Update.version);
+        txtVersion.setText(Update.version);
 
         LBLBalance.setText("Balance: "+currency.returnCurrency(player.returnBalance()));
 
@@ -208,39 +308,38 @@ public class Game extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LBLName)
-                            .addComponent(LBLBet)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(LBLName)
+                    .addComponent(LBLBet)
+                    .addComponent(txtVersion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(88, 88, 88)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
             .addGroup(layout.createSequentialGroup()
                 .addGap(279, 279, 279)
-                .addComponent(jLabel6)
+                .addComponent(lblTitle)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlReels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(pnlReels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(LBLName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(LBLBet)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8))
+                        .addComponent(txtVersion))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0))
@@ -251,15 +350,18 @@ public class Game extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTNSpinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNSpinActionPerformed
-        // TODO add your handling code here:
         if (Balance >= CurrentBet) {
-            BTNSpin.setEnabled(false);
-            BTNAuto.setEnabled(false);
-            BTNIncBet.setEnabled(false);
-            BTNDecBet.setEnabled(false);
-            Balance -= CurrentBet;
-            updateBalance();
-            spin();
+            if (back.verifyUser(false)) {
+                BTNSpin.setEnabled(false);
+                BTNAuto.setEnabled(false);
+                BTNIncBet.setEnabled(false);
+                BTNDecBet.setEnabled(false);
+                Balance -= CurrentBet;
+                updateBalance();
+                spin();
+            } else {
+                JOptionPane.showMessageDialog(this, "Your account doesn't appear to be active, you cannot play this game.", "Account Disabled", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Your balance is too low for this bet", "Insufficient Funds", JOptionPane.WARNING_MESSAGE);
         }
@@ -298,26 +400,28 @@ public class Game extends javax.swing.JFrame {
     private void mnuInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuInfoActionPerformed
         new Info().setVisible(true);
     }//GEN-LAST:event_mnuInfoActionPerformed
-    
+
     private void updateBet() {
         LBLBet.setText("Current Bet: " + currency.returnCurrency(CurrentBet));
-        
+
     }
-    
+
     private void updateBalance() {
-        LBLBalance.setText("Balance: " + currency.returnCurrency(Balance));
-        
+        player.setBalance(Balance);
+        LBLBalance.setText("Balance: " + currency.returnCurrency(player.returnBalance()));
+        back.setBalance(player.returnBalance());
+        Global.balance = player.returnBalance();
     }
     User player = new User();
-    
+
     public Game(String args[]) {
         player.setID(args[0]);
-        player.setName(args[1]);
-        player.setActive(Boolean.valueOf(args[2]));
-        player.setBalance(Double.valueOf(args[3]));
-        player.setAddress(args[4]);
-        player.setPassword(args[5]);
-        player.setPhoneNo(Integer.valueOf(args[6]));
+        player.setName(args[1] + " " + args[2]);
+        player.setActive(Boolean.valueOf(args[3]));
+        player.setBalance(Double.valueOf(args[4]));
+        Global.balance = player.returnBalance();
+        Global.ID = player.returnID();
+        Global.name = player.returnName();
         ID = player.returnID();
         Balance = player.returnBalance();
         try {
@@ -325,11 +429,21 @@ public class Game extends javax.swing.JFrame {
                 update.available();
             } else {
                 initComponents();
-                reels[0] = 6;
-                reels[1] = 3;
-                reels[2] = 1;
-                reels[3] = 4;
-                reels[4] = 6;
+                reels[0][0] = 5;
+                reels[0][1] = 1;
+                reels[0][2] = 7;
+                reels[1][0] = 4;
+                reels[1][1] = 5;
+                reels[1][2] = 5;
+                reels[2][0] = 2;
+                reels[2][1] = 7;
+                reels[2][2] = 6;
+                reels[3][0] = 3;
+                reels[3][1] = 3;
+                reels[3][2] = 7;
+                reels[4][0] = 5;
+                reels[4][1] = 1;
+                reels[4][2] = 1;
                 updateReels();
                 BTNDecBet.setVisible(false);
             }
@@ -337,7 +451,21 @@ public class Game extends javax.swing.JFrame {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    private int genReel(int number) {
+        int random = rand.nextInt(number);
+
+        //Cancel out 0, so now the number is between 1 and 7.
+        while (random == 0 || random == 1) {
+            random = 1;
+            //Make it harder to get bonus.
+            if (rand.nextInt(101) > 93) {
+                random = rand.nextInt(number);
+            }
+        }
+        return random;
+    }
+
     private void spin() {
         System.out.println("Spinning reels...");
         Thread t = new Thread() {
@@ -371,38 +499,65 @@ public class Game extends javax.swing.JFrame {
                 while (spinFor <= 5) {
                     spinFor = rand.nextInt(21);
                 }
+
                 int r1 = spinFor;
                 int r2 = r1 + rand.nextInt(15);
                 int r3 = r2 + rand.nextInt(13);
                 int r4 = r3 + rand.nextInt(10);
                 int r5 = r4 + rand.nextInt(9);
+
                 for (int i = 0; i < r5; i++) {
                     if (i < r1) {
-                        reels[0] += 1;
+                        //Update the last two rows of all columns with the value above each row.
+                        for (int j = 2; j > 0; j--) {
+                            reels[0][j] = reels[0][j - 1];
+                        }
+                        //Update top row with the new generated number
+                        reels[0][0] = genReel(8);
                         if (i == r1 - 1) {
                             stop.run();
                         }
                     }
                     if (i < r2) {
-                        reels[1] += 1;
+                        //Update the last two rows of all columns with the value above each row.
+                        for (int j = 2; j > 0; j--) {
+                            reels[1][j] = reels[1][j - 1];
+                        }
+                        //Update top row with the new generated number
+                        reels[1][0] = genReel(8);
                         if (i == r2 - 1) {
                             stop.run();
                         }
                     }
                     if (i < r3) {
-                        reels[2] += 1;
+                        //Update the last two rows of all columns with the value above each row.
+                        for (int j = 2; j > 0; j--) {
+                            reels[2][j] = reels[2][j - 1];
+                        }
+                        //Update top row with the new generated number
+                        reels[2][0] = genReel(8);
                         if (i == r3 - 1) {
                             stop.run();
                         }
                     }
                     if (i < r4) {
-                        reels[3] += 1;
+                        //Update the last two rows of all columns with the value above each row.
+                        for (int j = 2; j > 0; j--) {
+                            reels[3][j] = reels[3][j - 1];
+                        }
+                        //Update top row with the new generated number
+                        reels[3][0] = genReel(8);
                         if (i == r4 - 1) {
                             stop.run();
                         }
                     }
                     if (i < r5) {
-                        reels[4] += 1;
+                        //Update the last two rows of all columns with the value above each row.
+                        for (int j = 2; j > 0; j--) {
+                            reels[4][j] = reels[4][j - 1];
+                        }
+                        //Update top row with the new generated number
+                        reels[4][0] = genReel(8);
                         if (i == r5 - 1) {
                             stop.run();
                         }
@@ -410,6 +565,7 @@ public class Game extends javax.swing.JFrame {
                     updateReels();
                     Sleep();
                 }
+
                 double earned = win.checkForWin(reels, CurrentBet);
                 if (earned > 0) {
                     winSound.run();
@@ -424,20 +580,36 @@ public class Game extends javax.swing.JFrame {
         };
         t.start();
     }
-    
+
     private void updateReels() {
         for (int i = 0; i < 5; i++) {
-            if (reels[i] > 7) {
-                reels[i] = 1;
+            for (int j = 0; j < 3; j++) {
+                if (reels[i][j] > 7) {
+                    reels[i][j] = 1;
+                }
             }
         }
-        reel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[0] + ".jpg")));
-        reel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[1] + ".jpg")));
-        reel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[2] + ".jpg")));
-        reel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[3] + ".jpg")));
-        reel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[4] + ".jpg")));
+        reel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[0][0] + ".png")));
+        reel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[0][1] + ".png")));
+        reel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[0][2] + ".png")));
+
+        reel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[1][0] + ".png")));
+        reel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[1][1] + ".png")));
+        reel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[1][2] + ".png")));
+
+        reel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[2][0] + ".png")));
+        reel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[2][1] + ".png")));
+        reel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[2][2] + ".png")));
+
+        reel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[3][0] + ".png")));
+        reel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[3][1] + ".png")));
+        reel43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[3][2] + ".png")));
+
+        reel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[4][0] + ".png")));
+        reel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[4][1] + ".png")));
+        reel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + reels[4][2] + ".png")));
     }
-    
+
     private void Sleep() {
         try {
             Thread.sleep(50);
@@ -477,8 +649,11 @@ public class Game extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
-                new Game(args).setVisible(true);
+                if (args.length != 5) {
+                    JOptionPane.showMessageDialog(null, "This application is an addon for the casino app.", "Cannot run", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    new Game(args).setVisible(true);
+                }
             }
         });
     }
@@ -491,19 +666,29 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JLabel LBLBalance;
     private javax.swing.JLabel LBLBet;
     private javax.swing.JLabel LBLName;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JMenuItem mnuExit;
     private javax.swing.JMenuItem mnuInfo;
-    private javax.swing.JLabel reel1;
-    private javax.swing.JLabel reel2;
-    private javax.swing.JLabel reel3;
-    private javax.swing.JLabel reel4;
-    private javax.swing.JLabel reel5;
+    private javax.swing.JPanel pnlReels;
+    private javax.swing.JLabel reel11;
+    private javax.swing.JLabel reel12;
+    private javax.swing.JLabel reel13;
+    private javax.swing.JLabel reel21;
+    private javax.swing.JLabel reel22;
+    private javax.swing.JLabel reel23;
+    private javax.swing.JLabel reel31;
+    private javax.swing.JLabel reel32;
+    private javax.swing.JLabel reel33;
+    private javax.swing.JLabel reel41;
+    private javax.swing.JLabel reel42;
+    private javax.swing.JLabel reel43;
+    private javax.swing.JLabel reel51;
+    private javax.swing.JLabel reel52;
+    private javax.swing.JLabel reel53;
+    private javax.swing.JLabel txtVersion;
     // End of variables declaration//GEN-END:variables
 }

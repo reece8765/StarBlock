@@ -18,7 +18,7 @@ public class Update {
 
     Global message = new Global();
     Security sec = new Security();
-    public final static String version = "V0.01";
+    public final static String version = "V0.02";
 
     public boolean check() throws Exception {
         URL url = new URL("https://accessremote.uk/RTC/addons/StarBlock.txt");

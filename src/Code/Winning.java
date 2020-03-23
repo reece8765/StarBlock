@@ -12,202 +12,154 @@ package Code;
 public class Winning {
 
     private double winnings = 0.00;
+    boolean row1_4 = false;
+    boolean row2_4 = false;
+    boolean row3_4 = false;
+    boolean row1_5 = false;
+    boolean row2_5 = false;
+    boolean row3_5 = false;
 
-    public double checkForWin(int[] reels, double bet) {
+    public double checkForWin(int[][] reels, double bet) {
+        row1_4 = false;
+        row2_4 = false;
+        row3_4 = false;
+        row1_5 = false;
+        row2_5 = false;
+        row3_5 = false;
         winnings = 0.00;
-        switch (reels[0]) {
+        //Check all row 1
+        if (reels[0][0] == reels[1][0] && reels[1][0] == reels[2][0] && reels[2][0] == reels[3][0] && reels[3][0] == reels[4][0]) {
+            winnings += getWin(reels[0][0], 5, bet, 1);
+            row1_5 = true;
+        }
+        if (reels[0][0] == reels[1][0] && reels[1][0] == reels[2][0] && reels[2][0] == reels[3][0] && !row1_5) {
+            winnings += getWin(reels[0][0], 4, bet, 1);
+            row1_4 = true;
+        }
+        if (reels[0][0] == reels[1][0] && reels[1][0] == reels[2][0] && !row1_5 && !row1_4) {
+            winnings += getWin(reels[0][0], 3, bet, 1);
+        }
+        //Check all row 2
+        if (reels[0][1] == reels[1][1] && reels[1][1] == reels[2][1] && reels[2][1] == reels[3][1] && reels[3][1] == reels[4][1]) {
+            winnings += getWin(reels[0][1], 5, bet, 2);
+            row2_5 = true;
+        }
+        if (reels[0][1] == reels[1][1] && reels[1][1] == reels[2][1] && reels[2][1] == reels[3][1] && !row1_5) {
+            winnings += getWin(reels[0][1], 4, bet, 2);
+            row2_4 = true;
+        }
+        if (reels[0][1] == reels[1][1] && reels[1][1] == reels[2][1] && !row1_5 && !row1_4) {
+            winnings += getWin(reels[0][1], 3, bet, 2);
+        }
+        //Check all row 3
+        if (reels[0][2] == reels[1][2] && reels[1][2] == reels[2][2] && reels[2][2] == reels[3][2] && reels[3][2] == reels[4][2]) {
+            winnings += getWin(reels[0][2], 5, bet, 3);
+            row1_5 = true;
+        }
+        if (reels[0][2] == reels[1][2] && reels[1][2] == reels[2][2] && reels[2][2] == reels[3][2] && !row1_5) {
+            winnings += getWin(reels[0][2], 4, bet, 3);
+            row1_4 = true;
+        }
+        if (reels[0][2] == reels[1][2] && reels[1][2] == reels[2][2] && !row1_5 && !row1_4) {
+            winnings += getWin(reels[0][2], 3, bet, 3);
+        }
+        System.out.println("User won? " + (winnings > 0.0));
+        return winnings;
+    }
+
+    //Return wins based on what was won and how many rows matched and what the bet was.
+    private double getWin(int target, int match, double bet, int line) {
+        double award = 0.00;
+        switch (target) {
             case 1:
-                switch (reels[1]) {
-                    case 1:
-                        switch (reels[2]) {
-                            case 1:
-                                switch (reels[3]) {
-                                    case 1:
-                                        switch (reels[4]) {
-                                            case 1:
-                                                winnings += bet * 25000;
-                                                break;
-                                        }
-                                        winnings += bet * 2000;
-                                        break;
-                                }
-                                winnings += bet * 25;
-                                break;
-                            case 2:
-                                winnings += bet * 2;
-                                break;
-                            case 7:
-                                winnings += bet * 2;
-                                break;
-                        }
+                switch (match) {
+                    case 3: //Bonus win
+                        break;
+                    case 4: //Super bonus win
+                        break;
+                    case 5: //Mega bonus win
                         break;
                 }
+                break;
             case 2:
-                switch (reels[1]) {
-                    case 2:
-                        //2 in a row
-                        switch (reels[2]) {
-                            case 1:
-                            //Award is the same as case 3, no need to write code here or break.
-                            case 3:
-                                //Close match, award something...
-                                winnings += bet * 0.25;
-                                break;
-                            case 2:
-                                //See if there's a bigger win before awarding the win so far
-                                switch (reels[3]) {
-                                    case 2:
-                                        //Check to see if a full row is won before awarding the win
-                                        switch (reels[4]) {
-                                            case 2:
-                                                //Full row (win)
-                                                winnings = bet * 10;
-                                                break;
-                                        }
-                                        //4 in a row (win)
-                                        winnings += bet * 2;
-                                        break;
-                                }
-                                //3 in a row (win)
-                                winnings += bet * 0.5;
-                                break;
-                        }
+                switch (match) {
+                    case 3:
+                        award += bet * 250;
+                        break;
+                    case 4:
+                        award += bet * 2500;
+                        break;
+                    case 5:
+                        award += bet * 25000;
                         break;
                 }
                 break;
             case 3:
-                switch (reels[1]) {
+                switch (match) {
                     case 3:
-                        //2 in a row
-                        switch (reels[2]) {
-                            case 2:
-                            //Award is the same as case 3, no need to write code here or break.
-                            case 4:
-                                //Close match, award something...
-                                winnings += bet * 0.1;
-                                break;
-                            case 3:
-                                //See if there's a bigger win before awarding the win so far
-                                switch (reels[3]) {
-                                    case 3:
-                                        //Check to see if a full row is won before awarding the win
-                                        switch (reels[4]) {
-                                            case 3:
-                                                //Full row (win)
-                                                winnings = bet * 5;
-                                                break;
-                                        }
-                                        //4 in a row (win)
-                                        winnings += bet * 3;
-                                        break;
-                                }
-                                //3 in a row (win)
-                                winnings += bet * 0.5;
-                                break;
-                        }
+                        award += bet * 15;
+                        break;
+                    case 4:
+                        award += bet * 25;
+                        break;
+                    case 5:
+                        award += bet * 250;
+                        break;
+                }
+                break;
+            case 4:
+                switch (match) {
+                    case 3:
+                        award += bet * 0.4;
+                        break;
+                    case 4:
+                        award += bet;
+                        break;
+                    case 5:
+                        award += bet * 5;
                         break;
                 }
                 break;
             case 5:
-                switch (reels[1]) {
+                switch (match) {
+                    case 3:
+                        award += bet * 0.5;
+                        break;
+                    case 4:
+                        award += bet * 1.2;
                     case 5:
-                        //2 in a row
-                        switch (reels[2]) {
-                            case 4:
-                            //Award is the same as case 3, no need to write code here or break.
-                            case 6:
-                                //Close match, award something...
-                                winnings += bet * 0.1;
-                                break;
-                            case 5:
-                                //See if there's a bigger win before awarding the win so far
-                                switch (reels[3]) {
-                                    case 5:
-                                        //Check to see if a full row is won before awarding the win
-                                        switch (reels[4]) {
-                                            case 5:
-                                                //Full row (win)
-                                                winnings = bet * 4;
-                                                break;
-                                        }
-                                        //4 in a row (win)
-                                        winnings += bet;
-                                        break;
-                                }
-                                //3 in a row (win)
-                                winnings += bet * 0.2;
-                                break;
-                        }
+                        award += bet * 8;
                         break;
                 }
                 break;
             case 6:
-                switch (reels[1]) {
-                    case 6:
-                        //2 in a row
-                        switch (reels[2]) {
-                            case 5:
-                            //Award is the same as case 3, no need to write code here or break.
-                            case 7:
-                                //Close match, award something...
-                                winnings += bet * 2;
-                                break;
-                            case 6:
-                                //See if there's a bigger win before awarding the win so far
-                                switch (reels[3]) {
-                                    case 6:
-                                        //Check to see if a full row is won before awarding the win
-                                        switch (reels[4]) {
-                                            case 6:
-                                                //Full row (win)
-                                                winnings = bet * 12;
-                                                break;
-                                        }
-                                        //4 in a row (win)
-                                        winnings += bet * 6;
-                                        break;
-                                }
-                                //3 in a row (win)
-                                winnings += bet * 4;
-                                break;
-                        }
+                switch (match) {
+                    case 3:
+                        award += bet;
+                        break;
+                    case 4:
+                        award += bet * 5;
+                        break;
+                    case 5:
+                        award *= 20;
                         break;
                 }
                 break;
             case 7:
-                switch (reels[1]) {
-                    case 7:
-                        //2 in a row
-                        switch (reels[2]) {
-                            case 6:
-                            //Award is the same as case 3, no need to write code here or break.
-                            case 1:
-                                //Close match, award something...
-                                winnings += bet * 0.50;
-                                break;
-                            case 7:
-                                //See if there's a bigger win before awarding the win so far
-                                switch (reels[3]) {
-                                    case 7:
-                                        //Check to see if a full row is won before awarding the win
-                                        switch (reels[4]) {
-                                            case 7:
-                                                //Full row (win)
-                                                winnings = bet * 5;
-                                                break;
-                                        }
-                                        //4 in a row (win)
-                                        winnings += bet * 2;
-                                        break;
-                                }
-                                //3 in a row (win)
-                                winnings += bet;
-                                break;
-                        }
+                switch (match) {
+                    case 3:
+                        award += bet * 0.7;
+                        break;
+                    case 4:
+                        award += bet * 10;
+                        break;
+                    case 5:
+                        award += bet * 28;
                         break;
                 }
                 break;
         }
-        return winnings;
+        System.out.println("User won: " + award + " on line " + line);
+        return award;
     }
 }

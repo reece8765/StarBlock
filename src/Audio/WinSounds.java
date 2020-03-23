@@ -1,5 +1,6 @@
 package Audio;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -36,7 +37,8 @@ public class WinSounds {
 
     private void load() {
         try {
-            audioInputStream = AudioSystem.getAudioInputStream(WinSounds.class.getResourceAsStream("win.wav"));
+            BufferedInputStream myStream = new BufferedInputStream(getClass().getResourceAsStream("win.wav"));
+            audioInputStream = AudioSystem.getAudioInputStream(myStream);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             loaded = true;

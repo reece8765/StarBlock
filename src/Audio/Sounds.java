@@ -1,5 +1,6 @@
 package Audio;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +39,8 @@ public class Sounds {
 
     private void load() {
         try {
-            audioInputStream = AudioSystem.getAudioInputStream(Sounds.class.getResourceAsStream("Reels.wav"));
+            BufferedInputStream myStream = new BufferedInputStream(getClass().getResourceAsStream("Reels.wav"));
+            audioInputStream = AudioSystem.getAudioInputStream(myStream);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             loaded = true;
